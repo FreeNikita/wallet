@@ -7,6 +7,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eslnt": "eslint --fix src/",
+    "firebase login": "firebase login",
+    "firebase deploy": "firebase deploy",
     "eject": "react-scripts eject"
   },
   "dependencies": {
@@ -14,6 +16,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "firebase": "^7.22.0",
     "i18next": "^19.8.0",
     "i18next-xhr-backend": "^3.2.2",
     "react": "^16.13.1",
