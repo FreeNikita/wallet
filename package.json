@@ -17,6 +17,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "firebase": "^7.22.0",
+    "firebaseui": "^4.6.1",
     "i18next": "^19.8.0",
     "i18next-xhr-backend": "^3.2.2",
     "react": "^16.13.1",

@@ -1,8 +1,6 @@
 import React from 'react';
 import {Route, Redirect, Switch} from 'react-router-dom';
-import {router} from '../../routing';
-import {home, login} from '../../routing';
-
+import {router, home, login} from 'constants/routing.config';
 
 export const Router = () => {
   const isAuth = true;
