@@ -6,7 +6,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eslnt": "eslint --fix src/",
+    "eslint": "eslint --fix src/",
     "firebase login": "firebase login",
     "firebase deploy": "firebase deploy",
     "eject": "react-scripts eject"
