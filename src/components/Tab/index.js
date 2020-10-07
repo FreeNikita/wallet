@@ -1,1 +1,1 @@
-export {CustomTeb} from './Tab';
+export {CustomTab} from './Tab';
