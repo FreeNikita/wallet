@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import {useTranslation} from 'react-i18next';
 
-import {CustomTeb} from 'components/Tab';
+import {CustomTab} from 'components/Tab';
 
 import {Login} from './Login';
 import {Registration} from './Registration';
@@ -37,7 +37,7 @@ export const LogonForm = () => {
         elevation={3}
         className={classes.wrapper}
       >
-        <CustomTeb
+        <CustomTab
           tabs={[t('form.login'), t('form.registration')]}
           content={[Login, Registration]}
         />
