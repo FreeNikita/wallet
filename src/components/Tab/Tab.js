@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState} from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import makeStyles from '@material-ui/core/styles/makeStyles';
@@ -9,9 +9,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const CustomTeb = ({tabs = [], content = []}) => {
+export const CustomTab = ({tabs = [], content = []}) => {
   const classes = useStyles();
-  const [tab, setTab] = React.useState(0);
+  const [tab, setTab] = useState(0);
+  const Content = content[tab];
 
   return (
     <Fragment>
@@ -26,7 +27,7 @@ export const CustomTeb = ({tabs = [], content = []}) => {
         {tabs.map((title) => <Tab label={title} key={title} />)}
       </Tabs>
 
-      { content[tab]() }
+      <Content />
     </Fragment>
   );
 };
