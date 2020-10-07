@@ -11,7 +11,7 @@ i18n
         loadPath: '/assets/i18n/{{ns}}/{{lng}}.json',
       },
       fallbackLng: 'en',
-      debug: true,
+      debug: false,
       ns: ['translations'],
       defaultNS: 'translations',
       // keySeparator: false,
