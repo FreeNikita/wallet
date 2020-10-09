@@ -20,6 +20,6 @@
     }
   },
   "rules": {
-
+    "max-len": [2, 120, 4, {"ignoreTrailingComments": true}]
   }
 }

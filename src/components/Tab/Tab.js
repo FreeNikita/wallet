@@ -24,9 +24,8 @@ export const CustomTab = ({tabs = [], content = []}) => {
         centered
         className={classes.tabs}
       >
-        {tabs.map((title) => <Tab label={title} key={title} />)}
+        {tabs.map(({title, disabled}) => <Tab label={title} key={title} disabled={disabled}/>)}
       </Tabs>
-
       <Content />
     </Fragment>
   );

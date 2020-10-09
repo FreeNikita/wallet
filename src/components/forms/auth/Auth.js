@@ -25,6 +25,11 @@ export const LogonForm = () => {
   const classes = useStyles();
   const {t} = useTranslation();
 
+  const tabs = [
+    {title: t('form.login')},
+    {title: t('form.registration'), disabled: true},
+  ];
+
   return (
     <Grid
       container
@@ -38,10 +43,12 @@ export const LogonForm = () => {
         className={classes.wrapper}
       >
         <CustomTab
-          tabs={[t('form.login'), t('form.registration')]}
+          tabs={tabs}
           content={[Login, Registration]}
         />
       </Paper>
     </Grid>
   );
 };
+
+

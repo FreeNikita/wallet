@@ -1,11 +1,8 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import {useTranslation} from 'react-i18next';
-import {UserContext} from '../../../contexts/user/userContext';
-
-import {registration} from 'modules/firebase';
 
 const useStyles = makeStyles((theme)=> {
   return {
@@ -22,29 +19,10 @@ export const Registration = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [conPassword, setConPassword] = useState('');
-  const [error, setError] = useState('');
+  // const [error, setError] = useState('');
 
   const classes = useStyles();
-  const {loginUser} = useContext(UserContext);
   const {t} = useTranslation();
-
-  const regis = (e) => {
-    e.preventDefault();
-    // if (password.length > 8 && password === conPassword) {
-    registration(email, password)
-        .then((res) => {
-          console.log(res);
-          const {email, uid, refreshToken} = res;
-          loginUser({
-            email,
-            uid,
-            refreshToken,
-          });
-        });
-    // } else {
-    //   setError('Please change password');
-    // }
-  };
 
   return (
     <form className={classes.form}>
@@ -79,15 +57,9 @@ export const Registration = () => {
         onChange={({target: {value}}) => setConPassword(value)}
       />
 
-      <Button
-        color="primary"
-        type="submit"
-        onClick={regis}
-      >
+      <Button color="primary" type="submit">
         {t('form.registration')}
       </Button>
-
-      {error}
     </form>
   );
 };

@@ -1,12 +1,15 @@
-import React, {useContext} from 'react';
+import React, {useMemo} from 'react';
+import {useHistory} from 'react-router-dom';
+import firebase from 'firebase';
+import {FirebaseAuthConsumer} from '@react-firebase/auth';
 import {makeStyles} from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import {Link} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Header from '@material-ui/core/AppBar';
-import {UserContext} from '../../contexts/user/userContext';
+import MenuIcon from '@material-ui/icons/Menu';
+import {login as pathLogin} from 'constants/routing.config';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,38 +23,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export const AppBar = () => {
-  const {logoutUser, user} = useContext(UserContext);
-  console.log('user', user);
   const classes = useStyles();
+  const history = useHistory();
+
+  const login = useMemo(() => history.push(pathLogin), [history]);
+  const logout = useMemo(() => firebase.auth().signOut(), []);
 
   return (
-    <Header position="static">
-      <Toolbar>
-        <IconButton
-          edge="start"
-          className={classes.menuButton}
-          color="inherit"
-          aria-label="menu"
-        >
-          ASD
-        </IconButton>
+    <FirebaseAuthConsumer>
+      {({isSignedIn}) => (
+        <Header position="static">
+          <Toolbar>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+            >
+              <MenuIcon />
+            </IconButton>
 
-        <Typography variant="h6" className={classes.title}>
-          <Link to="/">
-                    Home
-          </Link>
-        </Typography>
+            <Typography variant="h6" className={classes.title}>
+              Wallet
+            </Typography>
 
+            <Button color="inherit" onClick={ isSignedIn ? logout : login }>
+              { isSignedIn ? 'Logout' : 'Login' }
+            </Button>
 
-        <Button color="inherit">
-          <Link to="/login">
-            {user ? 'Logout' : 'Login' }
-          </Link>
-        </Button>
-
-      </Toolbar>
-    </Header>
+          </Toolbar>
+        </Header>
+      )}
+    </FirebaseAuthConsumer>
   );
 };

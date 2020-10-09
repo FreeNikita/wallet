@@ -1,34 +1,30 @@
-import React, {useContext} from 'react';
-import TextField from '@material-ui/core/TextField';
+import React from 'react';
 import Button from '@material-ui/core/Button';
-import makeStyles from '@material-ui/core/styles/makeStyles';
-import {useTranslation} from 'react-i18next';
-import {login, signGoogle} from 'modules/firebase';
-import {UserContext} from '../../../contexts/user/userContext';
+// import makeStyles from '@material-ui/core/styles/makeStyles';
+import {LOGIN_METHODS} from 'constants/login.config';
 
-const useStyles = makeStyles((theme)=> {
-  return {
-    form: {
-      display: 'grid',
-    },
-    input: {
-      marginBottom: theme.spacing(2),
-    },
-  };
-});
-
+// const useStyles = makeStyles((theme)=> {
+//   return {
+//     form: {
+//       display: 'grid',
+//     },
+//     input: {
+//       marginBottom: theme.spacing(2),
+//     },
+//   };
+// });
 
 export const Login = () => {
-  const classes = useStyles();
-  const {t} = useTranslation();
-  const {setLoginType, user} = useContext(UserContext);
-
-  console.log('user', user)
-
   return (
-    <Button color="primary" onClick={() => setLoginType('google')}>
-          Google
-    </Button>
+    <React.Fragment>
+      {
+        LOGIN_METHODS.map( ({title, sing}) => (
+          <Button color="primary" key={title} onClick={sing}>
+            {title}
+          </Button>
+        ))
+      }
+    </React.Fragment>
   );
 
   // return (
