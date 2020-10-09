@@ -1,1 +1,0 @@
-export {CustomTeb} from './Tab';

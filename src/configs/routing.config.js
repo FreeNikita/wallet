@@ -1,5 +1,5 @@
-import {HomePage} from '../pages/home';
-import {LoginPage} from '../pages/login';
+import { HomePage } from 'pages/home';
+import { LoginPage } from 'pages/login';
 
 export const home = '/';
 export const login = '/login';
