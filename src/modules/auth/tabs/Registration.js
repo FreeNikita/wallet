@@ -1,28 +1,25 @@
-import React, {useState} from 'react';
+import React, { useState, memo } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
-const useStyles = makeStyles((theme)=> {
-  return {
-    form: {
-      display: 'grid',
-    },
-    input: {
-      marginBottom: theme.spacing(2),
-    },
-  };
-});
+const useStyles = makeStyles((theme) => ({
+  form: {
+    display: 'grid',
+  },
+  input: {
+    marginBottom: theme.spacing(2),
+  },
+}));
 
-export const Registration = () => {
+export const Registration = memo(() => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [conPassword, setConPassword] = useState('');
-  // const [error, setError] = useState('');
 
   const classes = useStyles();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <form className={classes.form}>
@@ -34,7 +31,7 @@ export const Registration = () => {
         variant="outlined"
         autoComplete="email"
         value={email}
-        onChange={({target: {value}}) => setEmail(value)}
+        onChange={({ target: { value } }) => setEmail(value)}
       />
       <TextField
         className={classes.input}
@@ -44,7 +41,7 @@ export const Registration = () => {
         variant="outlined"
         autoComplete="password"
         value={password}
-        onChange={({target: {value}}) => setPassword(value)}
+        onChange={({ target: { value } }) => setPassword(value)}
       />
       <TextField
         className={classes.input}
@@ -54,7 +51,7 @@ export const Registration = () => {
         variant="outlined"
         autoComplete="password"
         value={conPassword}
-        onChange={({target: {value}}) => setConPassword(value)}
+        onChange={({ target: { value } }) => setConPassword(value)}
       />
 
       <Button color="primary" type="submit">
@@ -62,4 +59,6 @@ export const Registration = () => {
       </Button>
     </form>
   );
-};
+});
+
+Registration.displayName = 'Registration';

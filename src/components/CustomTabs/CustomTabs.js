@@ -1,4 +1,5 @@
-import React, {Fragment, useState} from 'react';
+import React, { useState, memo, useMemo } from 'react';
+import { string, elementType, arrayOf } from 'prop-types';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import makeStyles from '@material-ui/core/styles/makeStyles';
@@ -9,13 +10,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const CustomTab = ({tabs = [], content = []}) => {
+export const CustomTabs = memo(({ tabs, content }) => {
   const classes = useStyles();
   const [tab, setTab] = useState(0);
-  const Content = content[tab];
+  const Content = useMemo(() => content[tab], [tab, content]);
 
   return (
-    <Fragment>
+    <>
       <Tabs
         value={tab}
         onChange={(e, value) => setTab(value)}
@@ -24,9 +25,16 @@ export const CustomTab = ({tabs = [], content = []}) => {
         centered
         className={classes.tabs}
       >
-        {tabs.map(({title, disabled}) => <Tab label={title} key={title} disabled={disabled}/>)}
+        {tabs.map(({ title, disabled }) => <Tab label={title} key={title} disabled={disabled} />)}
       </Tabs>
       <Content />
-    </Fragment>
+    </>
   );
+});
+
+CustomTabs.displayName = 'CustomTab';
+
+CustomTabs.propTypes = {
+  tabs: arrayOf(string).isRequired,
+  content: arrayOf(elementType).isRequired,
 };

@@ -9,7 +9,7 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "google"
+    "airbnb"
   ],
   "plugins": [
     "react"
@@ -20,6 +20,16 @@
     }
   },
   "rules": {
-    "max-len": [2, 120, 4, {"ignoreTrailingComments": true}]
+    "max-len": [2, 120, 4, {"ignoreTrailingComments": true}],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "import/prefer-default-export": "off",
+    "react/jsx-props-no-spreading": ["error",{"custom": "ignore"}]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
   }
 }

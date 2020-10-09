@@ -1,15 +1,15 @@
-import React, {Suspense} from 'react';
-import {BrowserRouter} from 'react-router-dom';
+import React, { Suspense } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 
 // Firebase setting
 import firebase from 'firebase/app';
-import {FirebaseAuthProvider} from '@react-firebase/auth';
-import {firebaseConfig} from 'constants/firebase.config';
+import { FirebaseAuthProvider } from '@react-firebase/auth';
+import { firebaseConfig } from 'configs/firebase.config';
 
 // Component
-import {AppBar} from 'components/AppBar';
-import {Router} from 'conteiners/routing/Routing';
+import { AppBar } from 'components/AppBar';
+import { Router } from 'conteiners/routing/Routing';
 
 import './i18n';
 
@@ -22,9 +22,9 @@ function App() {
     <Suspense fallback="loading">
       <FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
         <BrowserRouter>
-          <AppBar/>
+          <AppBar />
           <Container>
-            <Router/>
+            <Router />
           </Container>
         </BrowserRouter>
       </FirebaseAuthProvider>
