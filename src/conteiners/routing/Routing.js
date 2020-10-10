@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import { router, home, login } from 'configs/routing.config';
 import { FirebaseAuthConsumer } from '@react-firebase/auth';
+import { router, home, login } from 'configs/routing.config';
 
 export const Router = () => (
   <FirebaseAuthConsumer>
