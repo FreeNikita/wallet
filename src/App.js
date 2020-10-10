@@ -17,7 +17,7 @@ function App() {
   return (
     <Suspense fallback="loading">
       <FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
-        <FirebaseDatabaseProvider>
+        <FirebaseDatabaseProvider {...firebaseConfig} firebase={firebase}>
           <BrowserRouter>
             <WrapperPage />
           </BrowserRouter>
