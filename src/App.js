@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 // Firebase setting
 import firebase from 'firebase/app';
 import { FirebaseAuthProvider } from '@react-firebase/auth';
+import { FirebaseDatabaseProvider } from '@react-firebase/database';
 import { firebaseConfig } from 'configs/firebase.config';
 
 import { WrapperPage } from 'conteiners/wrapperPage';
@@ -17,9 +18,11 @@ function App() {
   return (
     <Suspense fallback="loading">
       <FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
-        <BrowserRouter>
-          <WrapperPage />
-        </BrowserRouter>
+        <FirebaseDatabaseProvider>
+          <BrowserRouter>
+            <WrapperPage />
+          </BrowserRouter>
+        </FirebaseDatabaseProvider>
       </FirebaseAuthProvider>
     </Suspense>
   );

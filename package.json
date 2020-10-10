@@ -15,6 +15,7 @@
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@react-firebase/auth": "^0.2.10",
+    "@react-firebase/database": "^0.3.11",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -51,7 +52,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run eslnt"
+      "pre-commit": "npm run eslint"
     }
   }
 }
