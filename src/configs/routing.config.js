@@ -1,8 +1,10 @@
 import { HomePage } from 'pages/home';
 import { LoginPage } from 'pages/login';
+import { ProfilePage } from 'pages/profile';
 
 export const home = '/';
 export const login = '/login';
+export const profile = '/profile';
 export const all = '/*';
 
 export const router = [
@@ -17,5 +19,11 @@ export const router = [
     path: login,
     exact: false,
     isPrivate: false,
+  },
+  {
+    page: ProfilePage,
+    path: profile,
+    exact: false,
+    isPrivate: true,
   },
 ];
