@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-
 // Firebase setting
 import firebase from 'firebase/app';
 import { FirebaseAuthProvider } from '@react-firebase/auth';

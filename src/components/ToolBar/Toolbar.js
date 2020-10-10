@@ -43,14 +43,12 @@ export const ToolBar = () => {
             <div className={classes.drawerContainer}>
               <List>
                 {main.map(({ type, Icon }) => (
-                  <List>
-                    <ListItem button onClick={handlers[type]}>
-                      <ListItemIcon>
-                        <Icon />
-                      </ListItemIcon>
-                      <ListItemText primary={type} />
-                    </ListItem>
-                  </List>
+                  <ListItem button onClick={handlers[type]} key={type}>
+                    <ListItemIcon>
+                      <Icon />
+                    </ListItemIcon>
+                    <ListItemText primary={type} />
+                  </ListItem>
                 ))}
               </List>
             </div>
@@ -58,7 +56,7 @@ export const ToolBar = () => {
               {isSignedIn && (
                 <List>
                   {second.map(({ type, Icon }) => (
-                    <ListItem button onClick={handlers[type]}>
+                    <ListItem button onClick={handlers[type]} key={type}>
                       <ListItemIcon>
                         <Icon />
                       </ListItemIcon>
