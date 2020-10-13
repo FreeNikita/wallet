@@ -5,6 +5,7 @@ import firebase from 'firebase/app';
 import { FirebaseAuthProvider } from '@react-firebase/auth';
 import { FirebaseDatabaseProvider } from '@react-firebase/database';
 import { firebaseConfig } from 'configs/firebase.config';
+import 'firebase/auth';
 
 import { WrapperPage } from 'conteiners/wrapperPage';
 import './i18n';
