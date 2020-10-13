@@ -16,6 +16,7 @@ import { auth } from 'configs/login.config';
 import { toolbarContent } from 'configs/toolbar.config';
 import { home as pathHome, profile as pathProfile } from 'configs/routing.config';
 
+import { Wallet } from 'components/ToolBar/components';
 import { useStyles } from './style';
 
 export const ToolBar = () => {
@@ -53,7 +54,11 @@ export const ToolBar = () => {
                   </ListItem>
                 ))}
               </List>
+
+
+              <Wallet />
             </div>
+
             <div>
               {isSignedIn && (
                 <List>

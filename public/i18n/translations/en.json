@@ -9,5 +9,9 @@
     "setting": "Setting",
     "profile": "Profile",
     "home": "Home"
+  },
+  "wallet": {
+    "toolbarTitle": "Your Wallet",
+    "addNew": "New wallet"
   }
 }
