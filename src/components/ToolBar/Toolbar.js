@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { FirebaseAuthConsumer } from '@react-firebase/auth';
 
 // Material
@@ -20,6 +21,7 @@ import { useStyles } from './style';
 export const ToolBar = () => {
   const classes = useStyles();
   const history = useHistory();
+  const { t } = useTranslation();
   const { main, second } = toolbarContent;
 
   const handlers = {
@@ -43,14 +45,12 @@ export const ToolBar = () => {
             <div className={classes.drawerContainer}>
               <List>
                 {main.map(({ type, Icon }) => (
-                  <List>
-                    <ListItem button onClick={handlers[type]}>
-                      <ListItemIcon>
-                        <Icon />
-                      </ListItemIcon>
-                      <ListItemText primary={type} />
-                    </ListItem>
-                  </List>
+                  <ListItem button onClick={handlers[type]} key={type}>
+                    <ListItemIcon>
+                      <Icon />
+                    </ListItemIcon>
+                    <ListItemText primary={t(`toolbar.${type}`)} />
+                  </ListItem>
                 ))}
               </List>
             </div>
@@ -58,11 +58,11 @@ export const ToolBar = () => {
               {isSignedIn && (
                 <List>
                   {second.map(({ type, Icon }) => (
-                    <ListItem button onClick={handlers[type]}>
+                    <ListItem button onClick={handlers[type]} key={type}>
                       <ListItemIcon>
                         <Icon />
                       </ListItemIcon>
-                      <ListItemText primary={type} />
+                      <ListItemText primary={t(`toolbar.${type}`)} />
                     </ListItem>
                   ))}
                 </List>

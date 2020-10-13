@@ -51,7 +51,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run eslnt"
+      "pre-commit": "npm run eslint"
     }
   }
 }
