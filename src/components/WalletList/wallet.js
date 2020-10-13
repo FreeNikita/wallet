@@ -57,7 +57,7 @@ const test = [
 export const Wallet = () => {
   const { t } = useTranslation();
   const history = useHistory();
-  const [activeWallet, setActiveWallet] = useState(2);
+  const [activeWallet, setActiveWallet] = useState(null);
 
   const handlerClick = useCallback((id) => {
     setActiveWallet(id);
