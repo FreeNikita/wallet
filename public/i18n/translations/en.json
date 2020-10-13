@@ -8,7 +8,8 @@
     "logout": "Logout",
     "setting": "Setting",
     "profile": "Profile",
-    "home": "Home"
+    "home": "Home",
+    "recommend": "Recommend Info"
   },
   "wallet": {
     "toolbarTitle": "Your Wallet",

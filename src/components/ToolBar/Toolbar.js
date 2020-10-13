@@ -16,7 +16,8 @@ import { auth } from 'configs/login.config';
 import { toolbarContent } from 'configs/toolbar.config';
 import { home as pathHome, profile as pathProfile } from 'configs/routing.config';
 
-import { Wallet } from 'components/ToolBar/components';
+import { Wallet } from 'components/WalletList';
+import { Recommend } from 'components/Recommend';
 import { useStyles } from './style';
 
 export const ToolBar = () => {
@@ -55,11 +56,11 @@ export const ToolBar = () => {
                 ))}
               </List>
 
-
               <Wallet />
             </div>
 
             <div>
+              <Recommend />
               {isSignedIn && (
                 <List>
                   {second.map(({ type, Icon }) => (

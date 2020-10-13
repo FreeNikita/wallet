@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
@@ -12,6 +12,8 @@ import CreditCardIcon from '@material-ui/icons/CreditCard';
 import AddIcon from '@material-ui/icons/Add';
 
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
+import { wallet as pathWallet } from 'configs/routing.config';
 
 const icon = (active) => ({
   bank: <AccountBalanceIcon color={active ? 'primary' : 'inherit'} />,
@@ -54,7 +56,13 @@ const test = [
 
 export const Wallet = () => {
   const { t } = useTranslation();
+  const history = useHistory();
   const [activeWallet, setActiveWallet] = useState(2);
+
+  const handlerClick = useCallback((id) => {
+    setActiveWallet(id);
+    history.push(`${pathWallet}/${id}`);
+  }, [history]);
 
   const title = useMemo(() => (
     <ListSubheader component="div" id="nested-list-subheader">
@@ -74,7 +82,7 @@ export const Wallet = () => {
           <ListItem
             selected={id === activeWallet}
             // selected={active}
-            onClick={() => setActiveWallet(id)}
+            onClick={() => handlerClick(id)}
             button
             key={id}
           >
