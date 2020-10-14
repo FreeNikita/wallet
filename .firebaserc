@@ -1,9 +1,5 @@
 {
   "projects": {
     "default": "wallet-2920f"
-  },
-  "rewrites": [{
-    "source": "**",
-    "destination": "/index.html"
-  }]
+  }
 }
