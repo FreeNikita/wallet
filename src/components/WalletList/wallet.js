@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { gql, useQuery } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
+import { useQuery } from '@apollo/client';
 
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
@@ -8,45 +9,30 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
-import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
-import CreditCardIcon from '@material-ui/icons/CreditCard';
 import AddIcon from '@material-ui/icons/Add';
 
-import { useTranslation } from 'react-i18next';
-import { wallet as pathWallet } from 'configs/routing.config';
-
-const icon = (active) => ({
-  bank: <AccountBalanceIcon color={active ? 'primary' : 'inherit'} />,
-  wallet: <AccountBalanceWalletIcon color={active ? 'primary' : 'inherit'} />,
-  card: <CreditCardIcon color={active ? 'primary' : 'inherit'} />,
-});
-
-const GetAllWallets = gql`
-  query GetAllWallets($user_id: String) {
-    getAllWallets(user_id: $user_id){
-      id
-      name
-      amount
-      currency
-      type
-    }
-  }
-`;
+import { wallet as pathWallet, walletAdd } from 'configs/routing.config';
+import { Query } from 'API/graphql';
+import { getIconTypesWallet } from 'constants/wallet';
+import Cookies from 'js-cookie';
 
 export const Wallet = () => {
   const { t } = useTranslation();
   const history = useHistory();
   const { pathname } = useLocation();
-
+  const user_id = Cookies.get('user_id');
   const activeWallet = pathname.split('/')[2];
 
-  const { loading, error, data } = useQuery(GetAllWallets, {
-    variables: { user_id: '5f8b5b781f21120c37a00f06' },
+  const { data } = useQuery(Query.GET_ALL_WALLET, {
+    variables: { user_id },
   });
 
   const handlerClick = useCallback((id) => {
     history.push(`${pathWallet}/${id}`);
+  }, [history]);
+
+  const handlerAddWallet = useCallback(() => {
+    history.push(walletAdd);
   }, [history]);
 
   const title = useMemo(() => (
@@ -73,14 +59,14 @@ export const Wallet = () => {
               key={id}
             >
               <ListItemIcon>
-                {icon(isActive)[type]}
+                {getIconTypesWallet(isActive)[type]}
               </ListItemIcon>
               <ListItemText primary={name} />
             </ListItem>
           );
         })}
 
-        <ListItem button>
+        <ListItem button onClick={handlerAddWallet}>
           <ListItemIcon>
             <AddIcon />
           </ListItemIcon>
