@@ -1,4 +1,6 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import { gql, useQuery } from '@apollo/client';
 
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
@@ -12,7 +14,6 @@ import CreditCardIcon from '@material-ui/icons/CreditCard';
 import AddIcon from '@material-ui/icons/Add';
 
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
 import { wallet as pathWallet } from 'configs/routing.config';
 
 const icon = (active) => ({
@@ -21,46 +22,30 @@ const icon = (active) => ({
   card: <CreditCardIcon color={active ? 'primary' : 'inherit'} />,
 });
 
-const test = [
-  {
-    id: 1,
-    name: 'UAH',
-    active: false,
-    type: 'bank',
-  },
-  {
-    id: 2,
-    name: 'UAH',
-    active: false,
-    type: 'wallet',
-  },
-  {
-    id: 3,
-    name: 'USD',
-    active: true,
-    type: 'wallet',
-  },
-  {
-    id: 4,
-    name: 'EUR',
-    active: false,
-    type: 'card',
-  },
-  {
-    id: 5,
-    name: 'Deposit',
-    active: false,
-    type: 'bank',
-  },
-];
+const GetAllWallets = gql`
+  query GetAllWallets($user_id: String) {
+    getAllWallets(user_id: $user_id){
+      id
+      name
+      amount
+      currency
+      type
+    }
+  }
+`;
 
 export const Wallet = () => {
   const { t } = useTranslation();
   const history = useHistory();
-  const [activeWallet, setActiveWallet] = useState(null);
+  const { pathname } = useLocation();
+
+  const activeWallet = pathname.split('/')[2];
+
+  const { loading, error, data } = useQuery(GetAllWallets, {
+    variables: { user_id: '5f8b5b781f21120c37a00f06' },
+  });
 
   const handlerClick = useCallback((id) => {
-    setActiveWallet(id);
     history.push(`${pathWallet}/${id}`);
   }, [history]);
 
@@ -76,22 +61,24 @@ export const Wallet = () => {
       <List
         subheader={title}
       >
-        {test.map(({
-          id, name, active, type,
-        }) => (
-          <ListItem
-            selected={id === activeWallet}
-            // selected={active}
-            onClick={() => handlerClick(id)}
-            button
-            key={id}
-          >
-            <ListItemIcon>
-              {icon(id === activeWallet)[type]}
-            </ListItemIcon>
-            <ListItemText primary={name} />
-          </ListItem>
-        ))}
+        {data && data.getAllWallets.map(({
+          id, name, type,
+        }) => {
+          const isActive = id === activeWallet;
+          return (
+            <ListItem
+              selected={isActive}
+              onClick={() => handlerClick(id)}
+              button
+              key={id}
+            >
+              <ListItemIcon>
+                {icon(isActive)[type]}
+              </ListItemIcon>
+              <ListItemText primary={name} />
+            </ListItem>
+          );
+        })}
 
         <ListItem button>
           <ListItemIcon>
