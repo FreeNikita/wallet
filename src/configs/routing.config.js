@@ -3,12 +3,14 @@ import { LoginPage } from 'pages/login';
 import { ProfilePage } from 'pages/profile';
 import { RecommendPage } from 'pages/recommend';
 import { WalletPage } from 'pages/wallet';
+import { WalletAddPage } from 'pages/walletAdd';
 
 export const home = '/';
 export const login = '/login';
 export const profile = '/profile';
 export const recommend = '/recommend';
 export const wallet = '/wallet';
+export const walletAdd = '/walletAdd';
 export const all = '/*';
 
 export const router = [
@@ -33,6 +35,12 @@ export const router = [
   {
     page: WalletPage,
     path: `${wallet}/:id`,
+    exact: false,
+    isPrivate: true,
+  },
+  {
+    page: WalletAddPage,
+    path: walletAdd,
     exact: false,
     isPrivate: true,
   },
