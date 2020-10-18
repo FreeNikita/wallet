@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { FirebaseAuthConsumer } from '@react-firebase/auth';
 
 // Material
 import Drawer from '@material-ui/core/Drawer';
@@ -18,12 +17,14 @@ import { home as pathHome, profile as pathProfile } from 'configs/routing.config
 
 import { Wallet } from 'components/WalletList';
 import { Recommend } from 'components/Recommend';
+import { useUser } from 'reactfire';
 import { useStyles } from './style';
 
 export const ToolBar = () => {
   const classes = useStyles();
   const history = useHistory();
   const { t } = useTranslation();
+  const user = useUser();
   const { main, second } = toolbarContent;
 
   const handlers = {
@@ -33,50 +34,46 @@ export const ToolBar = () => {
   };
 
   return (
-    <FirebaseAuthConsumer>
-      {({ isSignedIn }) => (
-        <Drawer
-          className={classes.drawer}
-          variant="permanent"
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <Toolbar />
-          <div className={classes.drawerContent}>
-            <div className={classes.drawerContainer}>
-              <List>
-                {main.map(({ type, Icon }) => (
-                  <ListItem button onClick={handlers[type]} key={type}>
-                    <ListItemIcon>
-                      <Icon />
-                    </ListItemIcon>
-                    <ListItemText primary={t(`toolbar.${type}`)} />
-                  </ListItem>
-                ))}
-              </List>
+    <Drawer
+      className={classes.drawer}
+      variant="permanent"
+      classes={{
+        paper: classes.drawerPaper,
+      }}
+    >
+      <Toolbar />
+      <div className={classes.drawerContent}>
+        <div className={classes.drawerContainer}>
+          <List>
+            {main.map(({ type, Icon }) => (
+              <ListItem button onClick={handlers[type]} key={type}>
+                <ListItemIcon>
+                  <Icon />
+                </ListItemIcon>
+                <ListItemText primary={t(`toolbar.${type}`)} />
+              </ListItem>
+            ))}
+          </List>
 
-              <Wallet />
-            </div>
+          { user && <Wallet /> }
+        </div>
 
-            <div>
-              <Recommend />
-              {isSignedIn && (
-                <List>
-                  {second.map(({ type, Icon }) => (
-                    <ListItem button onClick={handlers[type]} key={type}>
-                      <ListItemIcon>
-                        <Icon />
-                      </ListItemIcon>
-                      <ListItemText primary={t(`toolbar.${type}`)} />
-                    </ListItem>
-                  ))}
-                </List>
-              )}
-            </div>
-          </div>
-        </Drawer>
-      )}
-    </FirebaseAuthConsumer>
+        <div>
+          <Recommend />
+          {user && (
+          <List>
+            {second.map(({ type, Icon }) => (
+              <ListItem button onClick={handlers[type]} key={type}>
+                <ListItemIcon>
+                  <Icon />
+                </ListItemIcon>
+                <ListItemText primary={t(`toolbar.${type}`)} />
+              </ListItem>
+            ))}
+          </List>
+          )}
+        </div>
+      </div>
+    </Drawer>
   );
 };

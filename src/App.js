@@ -1,12 +1,13 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { ApolloProvider } from '@apollo/client';
 // Firebase setting
-import firebase from 'firebase/app';
-import { FirebaseAuthProvider } from '@react-firebase/auth';
-import { FirebaseDatabaseProvider } from '@react-firebase/database';
+import { FirebaseAppProvider } from 'reactfire';
+
 import { firebaseConfig } from 'configs/firebase.config';
 import 'firebase/auth';
 
+import { client } from 'configs/graphQL.config';
 import { WrapperPage } from 'conteiners/wrapperPage';
 import './i18n';
 
@@ -17,13 +18,13 @@ import './i18n';
 function App() {
   return (
     <Suspense fallback="loading">
-      <FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
-        <FirebaseDatabaseProvider {...firebaseConfig} firebase={firebase}>
+      <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+        <ApolloProvider client={client}>
           <BrowserRouter>
             <WrapperPage />
           </BrowserRouter>
-        </FirebaseDatabaseProvider>
-      </FirebaseAuthProvider>
+        </ApolloProvider>
+      </FirebaseAppProvider>
     </Suspense>
   );
 }
