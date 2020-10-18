@@ -1,5 +1,5 @@
 import React from 'react';
 
 export const ProfilePage = () => (
-  <div>ProfilePage</div>
+  <div>ProfilePage is not ready</div>
 );
