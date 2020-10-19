@@ -1,12 +1,4 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Wallet } from 'modules/wallet';
 
-export const WalletPage = () => {
-  const { id } = useParams();
-  return (
-    <div>
-      WalletPage
-      {id}
-    </div>
-  );
-};
+export const WalletPage = () => <Wallet />;
