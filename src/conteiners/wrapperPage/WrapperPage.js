@@ -23,17 +23,16 @@ const useStyles = makeStyles((theme) => ({
 
 export const WrapperPage = () => {
   const classes = useStyles();
-  const user = useUser();
-  const { uid } = user || {};
+  const { uid: firebase_id } = useUser() || {};
 
-  const { loading, error, data: { setUser } = {} } = useQuery(Query.SET_USER, {
-    variables: { firebase_id: uid },
+  const { error, data: { setUser } = {} } = useQuery(Query.SET_USER, {
+    variables: { firebase_id },
   });
 
   useEffect(() => {
     if (setUser) Cookies.set('user_id', setUser.id, { expires: 1 });
-    if (error || loading) Cookies.remove('user_id');
-  }, [setUser, error, loading]);
+    if (error) Cookies.remove('user_id');
+  }, [setUser, error]);
 
   return (
     <div className={classes.root}>
