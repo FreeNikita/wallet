@@ -5,8 +5,9 @@ import { useHistory } from 'react-router-dom';
 import { home } from 'configs/routing.config';
 
 import { gql, useMutation } from '@apollo/client';
+import Cookies from 'js-cookie';
 
-const ADD_TODO = gql`
+const SET_USER = gql`
   mutation SetUser($firebase_id: String!) {
     setUser(firebase_id: $firebase_id) {
       id
@@ -18,21 +19,21 @@ const ADD_TODO = gql`
 
 export const SocialLoginButton = memo(({ title, sing }) => {
   const history = useHistory();
-  const [setUser, { data }] = useMutation(ADD_TODO);
+  const [setUser] = useMutation(SET_USER);
 
   const login = () => sing()
     .then(({ additionalUserInfo: { profile }, user }) => {
       const { email, family_name, given_name } = profile;
       const { uid } = user;
-      setUser({
-        variables: {
-          firebase_id: uid,
-          email,
-          name: given_name,
-          surname: family_name,
-        },
-      });
+      return {
+        firebase_id: uid,
+        email,
+        name: given_name,
+        surname: family_name,
+      };
     })
+    .then((user) => setUser({ variables: user }))
+    .then(({ data }) => Cookies.set('user_id', data.setUser.id, { expires: 1 }))
     .then(() => history.push(home));
 
   return (

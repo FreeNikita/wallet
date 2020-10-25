@@ -1,26 +1,44 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { memo } from 'react';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 
-import Button from '@material-ui/core/Button';
+import {
+  number, objectOf, string,
+} from 'prop-types';
 
-export const Wallet = () => {
-  const { id } = useParams();
+export const Wallet = memo(({ data }) => {
+  console.log('data', data);
+  const { name, amount, currency } = data;
   return (
-    <div>
-        <div>
-            {id}
-        </div>
+    <>
+      <Grid item xs={3}>
+        <Paper>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {name}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {`${amount} ${currency}`}
+            </Typography>
+          </CardContent>
+        </Paper>
+      </Grid>
 
-        <div>
-            <Button variant="contained">Add</Button>
-            <Button variant="contained" color="primary">
-                Pay
-            </Button>
-        </div>
-
-      <Button variant="contained" color="secondary">
-        Remove
-      </Button>
-    </div>
+    </>
   );
+});
+
+Wallet.displayName = 'Wallet';
+
+Wallet.propTypes = {
+  data: objectOf({
+    id: string,
+    user_id: string,
+    name: string,
+    amount: number,
+    currency: string,
+    type: string,
+  }).isRequired,
 };
