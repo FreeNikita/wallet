@@ -26,16 +26,14 @@ export const WrapperPage = () => {
   const user = useUser();
   const { uid } = user || {};
 
-  const { loading, error, data } = useQuery(Query.SET_USER, {
+  const { loading, error, data: { setUser } = {} } = useQuery(Query.SET_USER, {
     variables: { firebase_id: uid },
-    fetchPolicy: 'user',
   });
 
   useEffect(() => {
-    if (data) {
-      Cookies.set('user_id', data.setUser.id, { expires: 7 });
-    }
-  }, [data]);
+    if (setUser) Cookies.set('user_id', setUser.id, { expires: 1 });
+    if (error || loading) Cookies.remove('user_id');
+  }, [setUser, error, loading]);
 
   return (
     <div className={classes.root}>
