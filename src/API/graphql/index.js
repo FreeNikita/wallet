@@ -1,6 +1,7 @@
 import {
   GET_ALL_WALLET,
   SET_USER,
+  GET_WALLET,
 } from './query';
 
 import {
@@ -10,6 +11,7 @@ import {
 export const Query = {
   GET_ALL_WALLET,
   SET_USER,
+  GET_WALLET,
 };
 
 export const Mutation = {

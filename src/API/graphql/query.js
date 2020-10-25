@@ -20,3 +20,19 @@ export const SET_USER = gql`
     }
   }
 `;
+
+export const GET_WALLET = gql`
+    query GetWallet($user_id: String!, $wallet_id: String!) {
+        getWallet(
+            user_id: $user_id
+            wallet_id: $wallet_id
+        ){
+            id
+            user_id
+            name
+            amount
+            currency
+            type
+        }
+    }
+`;
