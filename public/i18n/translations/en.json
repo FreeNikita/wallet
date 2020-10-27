@@ -2,12 +2,21 @@
   "Welcome": "Welcome1",
   "form": {
     "login": "Login",
-    "registration": "Registration"
+    "registration": "Registration",
+    "create": "Create"
   },
   "toolbar": {
     "logout": "Logout",
     "setting": "Setting",
     "profile": "Profile",
-    "home": "Home"
+    "home": "Home",
+    "recommend": "Recommend Info"
+  },
+  "wallet": {
+    "toolbarTitle": "Your Wallet",
+    "addNew": "New wallet",
+    "bank": "Bank account",
+    "wallet": "Wallet",
+    "card": "Card"
   }
 }
