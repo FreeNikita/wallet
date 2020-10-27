@@ -6,6 +6,8 @@ import {
 
 import {
   CREATE_WALLET,
+  UPDATE_WALLET,
+  REMOVE_WALLET,
 } from './mutation';
 
 export const Query = {
@@ -16,4 +18,6 @@ export const Query = {
 
 export const Mutation = {
   CREATE_WALLET,
+  UPDATE_WALLET,
+  REMOVE_WALLET,
 };

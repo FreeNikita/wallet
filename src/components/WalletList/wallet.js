@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@apollo/client';
@@ -23,17 +23,17 @@ export const Wallet = () => {
   const user_id = Cookies.get('user_id');
   const activeWallet = pathname.split('/')[2];
 
-  const { data, refetch } = useQuery(Query.GET_ALL_WALLET, {
+  const { data } = useQuery(Query.GET_ALL_WALLET, {
     variables: { user_id },
   });
 
   const handlerClick = useCallback((id) => {
     history.push(`${pathWallet}/${id}`);
-  }, []);
+  }, [history]);
 
   const handlerAddWallet = useCallback(() => {
     history.push(walletAdd);
-  }, []);
+  }, [history]);
 
   const title = useMemo(() => (
     <ListSubheader component="div" id="nested-list-subheader">

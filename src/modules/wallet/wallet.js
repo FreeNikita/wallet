@@ -1,31 +1,55 @@
 import React, { memo } from 'react';
+import { number, objectOf, string } from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
+import { CustomTabs } from 'components/CustomTabs';
 import {
-  number, objectOf, string,
-} from 'prop-types';
+  Main, Graph, History, Setting,
+} from './tabs';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  container: {
+    padding: theme.spacing(2),
+    color: theme.palette.text.secondary,
+  },
+}));
 
 export const Wallet = memo(({ data }) => {
-  console.log('data', data);
+  const classes = useStyles();
   const { name, amount, currency } = data;
+
+  const tabs = [
+    { title: 'Main Info' },
+    { title: 'History' },
+    { title: 'Graph' },
+    { title: 'Setting' },
+  ];
+
   return (
     <>
-      <Grid item xs={3}>
-        <Paper>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {name}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {`${amount} ${currency}`}
-            </Typography>
-          </CardContent>
-        </Paper>
-      </Grid>
-
+      {/*<Grid container spacing={3}>*/}
+      {/*  <Grid item xs={12}>*/}
+          <CustomTabs
+            tabs={tabs}
+            content={[
+              () => <Main data={data} />,
+              () => <Graph />,
+              () => <History />,
+              () => <Setting data={data} />,
+            ]}
+            indicatorColor="primary"
+            textColor="primary"
+            variant="fullWidth"
+          />
+        {/*</Grid>*/}
+      {/*</Grid>*/}
     </>
   );
 });

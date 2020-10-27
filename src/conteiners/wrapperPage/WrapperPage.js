@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useUser } from 'reactfire';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,9 +17,26 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    // padding: theme.spacing(3),
   },
 }));
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#8561c5',
+      main: '#673ab7',
+      dark: '#482880',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#5393ff',
+      main: '#2979ff',
+      dark: '#1c54b2',
+      contrastText: '#000',
+    },
+  },
+});
 
 export const WrapperPage = () => {
   const classes = useStyles();
@@ -35,16 +52,18 @@ export const WrapperPage = () => {
   }, [setUser, error]);
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar />
-      <ToolBar />
-      <main className={classes.content}>
-        <Toolbar />
-        <Container>
-          <Router />
-        </Container>
-      </main>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar />
+        <ToolBar />
+        <main className={classes.content}>
+          <Toolbar />
+          <Container>
+            <Router />
+          </Container>
+        </main>
+      </div>
+    </ThemeProvider>
   );
 };
