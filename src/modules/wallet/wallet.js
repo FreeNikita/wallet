@@ -34,22 +34,22 @@ export const Wallet = memo(({ data }) => {
 
   return (
     <>
-      {/*<Grid container spacing={3}>*/}
-      {/*  <Grid item xs={12}>*/}
-          <CustomTabs
-            tabs={tabs}
-            content={[
-              () => <Main data={data} />,
-              () => <Graph />,
-              () => <History />,
-              () => <Setting data={data} />,
-            ]}
-            indicatorColor="primary"
-            textColor="primary"
-            variant="fullWidth"
-          />
-        {/*</Grid>*/}
-      {/*</Grid>*/}
+      {/* <Grid container spacing={3}> */}
+      {/*  <Grid item xs={12}> */}
+      <CustomTabs
+        tabs={tabs}
+        content={[
+          () => <Main data={data} />,
+          () => <History data={data.history} />,
+          () => <Graph />,
+          () => <Setting data={data} />,
+        ]}
+        indicatorColor="primary"
+        textColor="primary"
+        variant="fullWidth"
+      />
+      {/* </Grid> */}
+      {/* </Grid> */}
     </>
   );
 });
