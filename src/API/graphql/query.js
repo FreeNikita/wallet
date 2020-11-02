@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import { Fragment } from './fragment';
 
 export const GET_ALL_WALLET = gql`
   query GetAllWallets($user_id: String) {
@@ -33,6 +34,15 @@ export const GET_WALLET = gql`
             amount
             currency
             type
+            history {
+                id
+                title
+                date
+                amount
+                category
+                subCategory
+                description
+            }
         }
     }
 `;

@@ -10,6 +10,7 @@ import { useMutation } from '@apollo/client';
 import Cookies from 'js-cookie';
 import { Mutation, Query } from 'API/graphql';
 import { typesWallet, currencies } from 'constants/wallet';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,13 +22,14 @@ const useStyles = makeStyles((theme) => ({
 
 export const AddWallet = () => {
   const classes = useStyles();
+  const history = useHistory();
   const { t } = useTranslation();
   const [createWallet] = useMutation(Mutation.CREATE_WALLET);
   const [{
     walletName, amount, type, currency,
   }, setValue] = useState({
     walletName: '',
-    amount: '',
+    amount: 0,
     currency: currencies[0],
     type: typesWallet[0],
   });
@@ -53,7 +55,10 @@ export const AddWallet = () => {
         query: Query.GET_ALL_WALLET,
         variables: { user_id },
       }],
-    });
+    })
+      .then(() => {
+        history.push('/');
+      });
   };
 
   return (

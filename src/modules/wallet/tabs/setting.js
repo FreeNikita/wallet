@@ -16,13 +16,20 @@ import { wallet as pathWallet } from 'configs/routing.config';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    marginTop: theme.spacing(6),
+    gridGap: theme.spacing(6),
+    alignItems: 'center',
+  },
   card: {
     padding: theme.spacing(3),
     display: 'grid',
     gridGap: theme.spacing(2),
   },
-  container: {
-    marginTop: theme.spacing(4),
+
+  buttonRemove: {
+    color: 'red',
+    minWidth: '250px',
   },
 }));
 
@@ -129,7 +136,12 @@ export const Setting = ({ data }) => {
 
         </Paper>
 
-        <Button onClick={remove}>Remove Card</Button>
+        <Button
+          className={classes.buttonRemove}
+          onClick={remove}
+        >
+          Remove Card
+        </Button>
       </Grid>
     </>
   );
